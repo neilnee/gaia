@@ -1,0 +1,11 @@
+*.iml
+.DS_Store
+*.setting
+.externalNativeBuild
+rewriter_log.txt
+/.gradle
+/local.properties
+/.idea
+/build
+/captures
+/gradle

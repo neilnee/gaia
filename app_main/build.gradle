@@ -1,0 +1,79 @@
+apply plugin: 'com.taobao.atlas.application'
+
+android {
+    compileSdkVersion Integer.parseInt(project.compileSdkVersion)
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.gaia.app"
+        minSdkVersion Integer.parseInt(project.minSdkVersion)
+        targetSdkVersion Integer.parseInt(project.targetSdkVersion)
+        versionCode 100000
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../neilni_key.jks')
+            storePassword 'neil0324'
+            keyAlias 'neilni_key'
+            keyPassword 'neil0324'
+            v2SigningEnabled false
+        }
+        debug {
+            storeFile file('../neilni_key.jks')
+            storePassword 'neil0324'
+            keyAlias 'neilni_key'
+            keyPassword 'neil0324'
+            v2SigningEnabled false
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+atlas {
+    // 设置启用atlas
+    atlasEnabled true
+
+    tBuildConfig {
+        // 自动生成bundle的packageId
+        autoPackageId true
+        // 声明的远程bundle列表
+        outOfApkBundles = ['bundle_pages_remote']
+    }
+}
+
+dependencies {
+    compile('com.taobao.android:atlas_core:5.0.7@aar') {
+        transitive = true
+    }
+    // 使用动态部署功能依赖atlasupdate
+    compile 'com.taobao.android:atlasupdate:1.1.4.7@aar'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.3.1'
+
+    // 基础组件库
+    compile project(':bundle_core')
+    // 入口工程样例库
+    compile project(':bundle_hello')
+    // 插件bundle实现的样例库
+    bundleCompile project(':bundle_pages_plugin')
+    // 远程的插件bundle实现
+    bundleCompile project(':bundle_pages_remote')
+}

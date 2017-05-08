@@ -1,0 +1,33 @@
+apply plugin: 'com.taobao.atlas.library'
+
+android {
+    compileSdkVersion Integer.parseInt(project.compileSdkVersion)
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(project.minSdkVersion)
+        targetSdkVersion Integer.parseInt(project.targetSdkVersion)
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+atlas {
+    bundleConfig {
+        awbBundle true
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.3.1'
+
+    providedCompile project(':bundle_core')
+}

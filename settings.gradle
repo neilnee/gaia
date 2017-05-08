@@ -1,0 +1,1 @@
+include ':app_main', ':bundle_core', ':bundle_hello', ':bundle_pages_plugin', ':bundle_pages_remote'
