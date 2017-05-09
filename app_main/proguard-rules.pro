@@ -47,6 +47,19 @@
    public static final int *;
 }
 
+# -- for atlas --
+-keep class com.taobao.** { *; }
+-keep class android.databinding.** { *; }
+-keep class android.app.** { *; }
+-keep class android.support.multidex.** { *; }
+-keep class android.taobao.atlas.** { *; }
+-keep class com.uc.** { *; }
+
+-dontwarn android.taobao.atlas.**
+-dontwarn com.taobao.**
+-dontwarn android.databinding.**
+-dontwarn android.app.**
+
 # -- for retrofit --
 # Platform calls Class.forName on types which do not exist on Android to determine platform.
 -dontnote retrofit2.Platform
@@ -70,3 +83,17 @@
 -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
     <init>(java.lang.Throwable);
 }
+
+# -- for GSON --
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class sun.misc.Unsafe { *; }
+
+# -- for greenDAO --
+-dontwarn org.greenrobot.greendao.**
+
+# -- for gaia data model --
+-keep class com.gaia.core.net.ProtocolRequest { *; }
+-keep class com.gaia.core.net.ProtocolResult { *; }
+-keep class * extends com.gaia.core.net.ProtocolRequest { *; }
+-keep class * extends com.gaia.core.net.ProtocolResult { *; }
