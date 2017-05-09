@@ -1,4 +1,5 @@
-apply plugin: 'com.taobao.atlas.application'
+apply plugin: 'com.android.application'
+apply plugin: 'com.taobao.atlas'
 
 android {
     compileSdkVersion Integer.parseInt(project.compileSdkVersion)
@@ -34,14 +35,18 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-fresco.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'proguard-fresco.pro'
         }
         debug {
             signingConfig signingConfigs.debug
             minifyEnabled false
             shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-fresco.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'proguard-fresco.pro'
         }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
 }
@@ -77,3 +82,4 @@ dependencies {
     // 远程的插件bundle实现
     bundleCompile project(':bundle_pages_remote')
 }
+
